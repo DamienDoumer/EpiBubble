@@ -10,6 +10,7 @@ namespace EpiBubble
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        private Texture2D arrow;
 
         public EpiBubbleGame()
         {
@@ -38,6 +39,7 @@ namespace EpiBubble
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            arrow = Content.Load<Texture2D>("Arrow/Astral_Arrow");
 
             // TODO: use this.Content to load your game content here
         }
@@ -70,7 +72,9 @@ namespace EpiBubble
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            spriteBatch.Begin();
+            spriteBatch.Draw(arrow, Vector2.Zero, Color.White);
+            spriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
