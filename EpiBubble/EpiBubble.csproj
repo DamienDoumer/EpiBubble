@@ -12,7 +12,7 @@
     <AssemblyName>EpiBubble</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -103,13 +103,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Arrow.cs" />
-    <Compile Include="Models\EnumColorsArrow.cs" />
+    <Compile Include="Helpers\DeviceDetector.cs" />
     <Compile Include="ViewModels\GamePageViewModel.cs" />
+    <Compile Include="Views\EpiBubbleTabletGame.cs" />
+    <Compile Include="Views\EpiBubbleXboxGame.cs" />
     <Compile Include="Views\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EpiBubbleGame.cs" />
+    <Compile Include="Views\EpiBubbleDesktopGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -117,14 +118,9 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="EpiBubble_TemporaryKey.pfx" />
+    <PRIResource Include="Resources.resw" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Arrow\Astral_Arrow.png" />
-    <Content Include="Content\Arrow\Gold_Arrow.png" />
-    <Content Include="Content\Arrow\Grey_Arrow.png" />
-    <Content Include="Content\Arrow\Maroon_Arrow.png" />
-    <Content Include="Content\Arrow\Olive_Arrow.png" />
-    <Content Include="Content\Arrow\Rose_Arrow.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

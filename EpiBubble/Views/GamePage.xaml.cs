@@ -1,4 +1,7 @@
-﻿using System;
+﻿using EpiBubble.Helpers;
+using EpiBubble.Views;
+using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,15 +25,26 @@ namespace EpiBubble
     /// </summary>
     public sealed partial class GamePage : Page
     {
-		readonly EpiBubbleGame _game;
+		readonly Game _game;
 
 		public GamePage()
         {
             this.InitializeComponent();
 
-			// Create the game.
-			var launchArguments = string.Empty;
-            _game = MonoGame.Framework.XamlGame<EpiBubbleGame>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
+            var launchArguments = string.Empty;
+            // Create the game.
+            if (DeviceDetector.DetectDeviceType() == DeviceType.Desktop)
+            {
+                _game = MonoGame.Framework.XamlGame<EpiBubbleDesktopGame>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
+            }
+            else if(DeviceDetector.DetectDeviceType() == DeviceType.Tablet)
+            {
+                _game = MonoGame.Framework.XamlGame<EpiBubbleDesktopGame>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
+            }
+            else if (DeviceDetector.DetectDeviceType() == DeviceType.XBOX)
+            {
+                _game = MonoGame.Framework.XamlGame<EpiBubbleXboxGame>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
+            }
         }
     }
 }

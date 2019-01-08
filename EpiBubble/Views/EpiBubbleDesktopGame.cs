@@ -6,13 +6,13 @@ namespace EpiBubble
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class EpiBubbleGame : Game
+    public class EpiBubbleDesktopGame : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Texture2D arrow;
 
-        public EpiBubbleGame()
+        public EpiBubbleDesktopGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
