@@ -22,7 +22,7 @@ namespace EpiBubble
     /// </summary>
     public sealed partial class GamePage : Page
     {
-		readonly Game1 _game;
+		readonly EpiBubbleGame _game;
 
 		public GamePage()
         {
@@ -30,7 +30,7 @@ namespace EpiBubble
 
 			// Create the game.
 			var launchArguments = string.Empty;
-            _game = MonoGame.Framework.XamlGame<Game1>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
+            _game = MonoGame.Framework.XamlGame<EpiBubbleGame>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
         }
     }
 }

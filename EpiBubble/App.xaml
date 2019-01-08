@@ -3,6 +3,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:EpiBubble"
+    xmlns:viewModels="using:EpiBubble.ViewModels"
     RequestedTheme="Light">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <viewModels:GamePageViewModel x:Key="GameViewModel" />
+        </ResourceDictionary>
+    </Application.Resources>
 
 </Application>
