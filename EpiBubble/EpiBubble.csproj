@@ -115,6 +115,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="EpiBubble_TemporaryKey.pfx" />
+    <PRIResource Include="Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />
