@@ -10,6 +10,7 @@ namespace EpiBubble
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        private Texture2D arrow;
         private Texture2D _pointer;
 
         public EpiBubbleDesktopGame()
@@ -39,7 +40,8 @@ namespace EpiBubble
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            _pointer = Content.Load<Texture2D>("Pointer");
+            arrow = Content.Load<Texture2D>("Arrow/Astral_Arrow");
+            //_pointer = Content.Load<Texture2D>("Pointer");
 
             // TODO: use this.Content to load your game content here
         }
@@ -73,9 +75,12 @@ namespace EpiBubble
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            var yposition = graphics.GraphicsDevice.Viewport.Height - _pointer.Height - 10;
-            var xposition = (graphics.GraphicsDevice.Viewport.Width / 2) - (_pointer.Width / 2);
-            spriteBatch.Draw(_pointer, new Vector2(xposition, yposition), Color.White);
+            //var yposition = graphics.GraphicsDevice.Viewport.Height - _pointer.Height - 10;
+            //var xposition = (graphics.GraphicsDevice.Viewport.Width / 2) - (_pointer.Width / 2);
+            //spriteBatch.Draw(_pointer, new Vector2(xposition, yposition), Color.White);
+            //spriteBatch.End();
+            //spriteBatch.Begin();
+            spriteBatch.Draw(arrow, Vector2.Zero, Color.White);
             spriteBatch.End();
             // TODO: Add your drawing code here
 
