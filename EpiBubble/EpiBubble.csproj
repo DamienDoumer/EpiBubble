@@ -103,11 +103,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DeviceDetector.cs" />
     <Compile Include="ViewModels\GamePageViewModel.cs" />
+    <Compile Include="Views\EpiBubbleTabletGame.cs" />
+    <Compile Include="Views\EpiBubbleXboxGame.cs" />
     <Compile Include="Views\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EpiBubbleGame.cs" />
+    <Compile Include="Views\EpiBubbleDesktopGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
