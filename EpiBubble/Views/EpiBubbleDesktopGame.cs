@@ -75,12 +75,12 @@ namespace EpiBubble
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            //var yposition = graphics.GraphicsDevice.Viewport.Height - _pointer.Height - 10;
-            //var xposition = (graphics.GraphicsDevice.Viewport.Width / 2) - (_pointer.Width / 2);
+            var yposition = graphics.GraphicsDevice.Viewport.Height - arrow.Height - 10;
+            var xposition = (graphics.GraphicsDevice.Viewport.Width / 2) - (arrow.Width / 2);
             //spriteBatch.Draw(_pointer, new Vector2(xposition, yposition), Color.White);
             //spriteBatch.End();
             //spriteBatch.Begin();
-            spriteBatch.Draw(arrow, Vector2.Zero, Color.White);
+            spriteBatch.Draw(arrow, new Vector2(xposition, yposition), Color.White);
             spriteBatch.End();
             // TODO: Add your drawing code here
 

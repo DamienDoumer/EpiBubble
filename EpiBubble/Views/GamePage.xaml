@@ -20,7 +20,7 @@
         <StackPanel Grid.Row="1" HorizontalAlignment="Right"
                     Margin="5" Orientation="Horizontal"
                     VerticalAlignment="Center">
-            <TextBlock Text="Score:" FontWeight="Bold" FontSize="50" Foreground="White" />
+            <TextBlock Text="Score:  " FontWeight="Bold" FontSize="50" Foreground="White" />
             <TextBlock Text="{Binding Score, Mode=TwoWay}"
                        FontWeight="ExtraBold" FontSize="50"  Foreground="White" />
         </StackPanel>
