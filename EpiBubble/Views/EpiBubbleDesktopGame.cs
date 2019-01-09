@@ -1,6 +1,7 @@
 ﻿using EpiBubble.Model;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace EpiBubble
 {
@@ -65,7 +66,7 @@ namespace EpiBubble
         protected override void Update(GameTime gameTime)
         {
             // TODO: Add your update logic here
-
+            _arrow.Update(Keyboard.GetState(), gameTime);
             base.Update(gameTime);
         }
 

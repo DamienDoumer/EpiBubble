@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,23 @@ namespace EpiBubble.Model
     public class Sprite
     {
         protected readonly Texture2D texture;
-        protected readonly Vector2 position;
+        protected Vector2 position;
         public Color Color { get; private set; }
+        protected Vector2 Velocity { get; set; }
+        protected float Speed { get; set; }
+        public float Width { get { return texture.Width; } }
+        public float Height { get { return texture.Height; } }
+        public Vector2 Position
+        {
+            get { return position; }
+        }
+
+        float _rotationAngle;
+        public float RotationAngle
+        {
+            get => _rotationAngle;
+            set { _rotationAngle = value; }
+        }
 
         public Sprite(Texture2D texture, Vector2 position, Color color)
         {
@@ -21,9 +37,14 @@ namespace EpiBubble.Model
             this.position = position;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, Color);
+        }
+
+        public virtual void Update(KeyboardState keyboardState, GameTime gameTime)
+        {
+            position += (Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds);
         }
     }
 }
