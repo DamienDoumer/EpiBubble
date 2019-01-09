@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using EpiBubble.Model;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace EpiBubble
@@ -11,6 +12,7 @@ namespace EpiBubble
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Texture2D arrow;
+        private Arrow _arrow;
         private Texture2D _pointer;
 
         public EpiBubbleDesktopGame()
@@ -40,8 +42,10 @@ namespace EpiBubble
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            arrow = Content.Load<Texture2D>("Arrow/Astral_Arrow");
-            //_pointer = Content.Load<Texture2D>("Pointer");
+            var arrowTexture = Content.Load<Texture2D>("Arrow/Astral_Arrow");
+            var yPosition = graphics.GraphicsDevice.Viewport.Height - arrowTexture.Height - 5;
+            var xPosition = (graphics.GraphicsDevice.Viewport.Width / 2) - (arrowTexture.Width / 2);
+            _arrow = new Arrow(arrowTexture, new Vector2(xPosition, yPosition));
 
             // TODO: use this.Content to load your game content here
         }
@@ -75,12 +79,7 @@ namespace EpiBubble
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            var yposition = graphics.GraphicsDevice.Viewport.Height - arrow.Height - 10;
-            var xposition = (graphics.GraphicsDevice.Viewport.Width / 2) - (arrow.Width / 2);
-            //spriteBatch.Draw(_pointer, new Vector2(xposition, yposition), Color.White);
-            //spriteBatch.End();
-            //spriteBatch.Begin();
-            spriteBatch.Draw(arrow, new Vector2(xposition, yposition), Color.White);
+            _arrow.Draw(spriteBatch);
             spriteBatch.End();
             // TODO: Add your drawing code here
 

@@ -103,6 +103,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Arrow.cs" />
+    <Compile Include="Model\Bubble.cs" />
+    <Compile Include="Model\Sprite.cs" />
     <Compile Include="Helpers\DeviceDetector.cs" />
     <Compile Include="ViewModels\GamePageViewModel.cs" />
     <Compile Include="Views\EpiBubbleTabletGame.cs" />
