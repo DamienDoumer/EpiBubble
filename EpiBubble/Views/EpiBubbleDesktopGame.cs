@@ -43,7 +43,7 @@ namespace EpiBubble
             var arrowTexture = Content.Load<Texture2D>("Arrow/Astral_Arrow");
             var yPosition = graphics.GraphicsDevice.Viewport.Height - arrowTexture.Height - 5;
             var xPosition = (graphics.GraphicsDevice.Viewport.Width / 2) - (arrowTexture.Width / 2);
-            _arrow = new Arrow(arrowTexture, new Vector2(xPosition, yPosition));
+            _arrow = new Arrow(arrowTexture, new Vector2(xPosition, yPosition), Color.Green);
 
             // TODO: use this.Content to load your game content here
         }

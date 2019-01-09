@@ -12,17 +12,18 @@ namespace EpiBubble.Model
     {
         protected readonly Texture2D texture;
         protected readonly Vector2 position;
-        public Color Color { get; set; }
+        public Color Color { get; private set; }
 
-        public Sprite(Texture2D texture, Vector2 position)
+        public Sprite(Texture2D texture, Vector2 position, Color color)
         {
+            Color = color;
             this.texture = texture;
             this.position = position;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, Color.White);
+            spriteBatch.Draw(texture, position, Color);
         }
     }
 }

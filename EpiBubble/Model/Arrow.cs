@@ -10,7 +10,7 @@ namespace EpiBubble.Model
 {
     public class Arrow : Sprite
     {
-        public Arrow(Texture2D texture, Vector2 position) : base(texture, position)
+        public Arrow(Texture2D texture, Vector2 position, Color color) : base(texture, position, color)
         {
         }
     }
