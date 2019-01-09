@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,11 +42,13 @@ namespace EpiBubble.Model
         {
             if(keyboardState.IsKeyDown(Keys.Left))
             {
-                RotationAngle = RotationAngle + -0.1f;
+                if(RotationAngle > -1.1)
+                    RotationAngle = RotationAngle + -0.1f;
             }
             else if(keyboardState.IsKeyDown(Keys.Right))
             {
-                RotationAngle = RotationAngle + 0.1f;
+                if (RotationAngle < 1.1)
+                    RotationAngle = RotationAngle + 0.1f;
             }
         }
     }
