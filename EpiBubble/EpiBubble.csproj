@@ -124,6 +124,12 @@
     <PRIResource Include="Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Arrows\Astral_Arrow.png" />
+    <Content Include="Content\Arrows\Gold_Arrow.png" />
+    <Content Include="Content\Arrows\Grey_Arrow.png" />
+    <Content Include="Content\Arrows\Maroon_Arrow.png" />
+    <Content Include="Content\Arrows\Olive_Arrow.png" />
+    <Content Include="Content\Arrows\Rose_Arrow.png" />
     <Content Include="Content\Pointer.PNG">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
