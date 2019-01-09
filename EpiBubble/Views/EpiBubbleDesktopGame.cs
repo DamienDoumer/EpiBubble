@@ -11,9 +11,7 @@ namespace EpiBubble
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        private Texture2D arrow;
         private Arrow _arrow;
-        private Texture2D _pointer;
 
         public EpiBubbleDesktopGame()
         {

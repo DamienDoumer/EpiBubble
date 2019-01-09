@@ -8,15 +8,12 @@
     mc:Ignorable="d"
     DataContext="{StaticResource GameViewModel}">
 
-    <Grid>
-        <Grid.RowDefinitions>
+    <SwapChainPanel x:Name="swapChainPanel">
+        <SwapChainPanel.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        
-        <SwapChainPanel x:Name="swapChainPanel" />
-
+        </SwapChainPanel.RowDefinitions>
         <StackPanel Grid.Row="1" HorizontalAlignment="Right"
                     Margin="5" Orientation="Horizontal"
                     VerticalAlignment="Center">
@@ -36,6 +33,7 @@
             <Button Content="Restart" Grid.Column="2" Margin="5" Command="{Binding RestartCommand}"/>
             <Button Content="Setup" Grid.Column="3" Margin="5" Command="{Binding SetupCommand}"/>
         </Grid>
-    </Grid>
+    </SwapChainPanel>
+
 
 </Page>
