@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace EpiBubble
 {
@@ -65,6 +66,7 @@ namespace EpiBubble
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            var c = Helpers.Helpers.GetRandomBallColor();
             // TODO: Add your update logic here
             _arrow.Update(Keyboard.GetState(), gameTime);
             base.Update(gameTime);
@@ -76,6 +78,16 @@ namespace EpiBubble
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            var arrowTexture = Content.Load<Texture2D>("Arrow/Astral_Arrow");
+            var yPosition = graphics.GraphicsDevice.Viewport.Height - arrowTexture.Height + 50;
+            List<Arrow> arr = new List<Arrow>();
+            for(int i = 0; i < 16;i++)
+            {
+                var xPosition = (graphics.GraphicsDevice.Viewport.Width / 2) - (arrowTexture.Width / 2) + i;
+                var ar = new Arrow(arrowTexture, new Vector2(xPosition, yPosition), Helpers.Helpers.GetRandomBallColor());
+                ar.Draw(spriteBatch);
+                arr.Add(ar);
+            }
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             _arrow.Draw(spriteBatch);

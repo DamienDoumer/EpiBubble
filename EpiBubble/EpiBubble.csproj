@@ -103,6 +103,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Model\Arrow.cs" />
     <Compile Include="Model\Bubble.cs" />
     <Compile Include="Model\Sprite.cs" />
@@ -130,6 +131,9 @@
     <Content Include="Content\Arrows\Maroon_Arrow.png" />
     <Content Include="Content\Arrows\Olive_Arrow.png" />
     <Content Include="Content\Arrows\Rose_Arrow.png" />
+    <Content Include="Content\Bubble.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Pointer.PNG">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
