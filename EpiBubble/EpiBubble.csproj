@@ -104,6 +104,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Helpers.cs" />
+    <Compile Include="Helpers\RestartEventArgs.cs" />
     <Compile Include="Model\Arrow.cs" />
     <Compile Include="Model\Bubble.cs" />
     <Compile Include="Model\Sprite.cs" />

@@ -1,8 +1,14 @@
-﻿using EpiBubble.Model;
+﻿using EpiBubble.Helpers;
+using EpiBubble.Model;
+using EpiBubble.ViewModels;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ReactiveUI;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reactive.Linq;
 
 namespace EpiBubble
 {
@@ -30,7 +36,17 @@ namespace EpiBubble
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            MessageBus.Current.Listen<RestartEventArgs>()
+                .Where(e => e.Sender.GetType() == typeof(GamePageViewModel))
+                .Subscribe(
+                x => 
+                {
+                    Debug.WriteLine("Restart fired");
+                }, 
+                e => 
+                {
+                    Debug.WriteLine("Error while listening for game restart");
+                });
             base.Initialize();
         }
 

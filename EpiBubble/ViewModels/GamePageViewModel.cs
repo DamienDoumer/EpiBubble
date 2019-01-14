@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using EpiBubble.Helpers;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +21,14 @@ namespace EpiBubble.ViewModels
         public ICommand QuitCommand { get; private set; }
         public ICommand RestartCommand { get; private set; }
         public ICommand SetupCommand { get; private set; }
+
+        public GamePageViewModel()
+        {
+            QuitCommand = ReactiveCommand.Create(() => Environment.Exit(1));
+            RestartCommand = ReactiveCommand.Create(() =>
+            {
+                MessageBus.Current.SendMessage(new RestartEventArgs { Sender = this });
+            });
+        }
     }
 }
