@@ -72,22 +72,12 @@ namespace EpiBubble
             base.Update(gameTime);
         }
 
-        /// <summary>
+        /// <summary> 
         /// This is called when the game should draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            var arrowTexture = Content.Load<Texture2D>("Arrow/Astral_Arrow");
-            var yPosition = graphics.GraphicsDevice.Viewport.Height - arrowTexture.Height + 50;
-            List<Arrow> arr = new List<Arrow>();
-            for(int i = 0; i < 16;i++)
-            {
-                var xPosition = (graphics.GraphicsDevice.Viewport.Width / 2) - (arrowTexture.Width / 2) + i;
-                var ar = new Arrow(arrowTexture, new Vector2(xPosition, yPosition), Helpers.Helpers.GetRandomBallColor());
-                ar.Draw(spriteBatch);
-                arr.Add(ar);
-            }
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             _arrow.Draw(spriteBatch);
