@@ -42,7 +42,7 @@ namespace EpiBubble
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            var arrowTexture = Content.Load<Texture2D>("Arrow/Astral_Arrow");
+            var arrowTexture = Content.Load<Texture2D>("Arrow/Arrow");
             var yPosition = graphics.GraphicsDevice.Viewport.Height - arrowTexture.Height + 5;
             var xPosition = (graphics.GraphicsDevice.Viewport.Width / 2) - (arrowTexture.Width / 2);
             _arrow = new Arrow(arrowTexture, new Vector2(xPosition, yPosition), Color.Green);
