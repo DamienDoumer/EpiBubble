@@ -9,7 +9,6 @@
     <Application.Resources>
         <ResourceDictionary>
             <local:AppLocator x:Key="Locator"/>
-            <viewModels:GamePageViewModel x:Key="GameViewModel" />
         </ResourceDictionary>
     </Application.Resources>
 

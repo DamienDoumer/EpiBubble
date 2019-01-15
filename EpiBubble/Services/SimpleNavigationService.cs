@@ -10,12 +10,27 @@ using Windows.UI.Xaml.Controls;
 
 namespace EpiBubble.Services
 {
+    public enum DialogToNavigate
+    {
+        Setup,
+        Save
+    }
+
     public class SimpleNavigationService
     {
-        public async Task OpenDialogAsync()
+        public async Task OpenDialogAsync(DialogToNavigate dialogToNavigate)
         {
-            SetupDialog setupDialog = new SetupDialog();
-            await setupDialog.ShowAsync();
+            if (dialogToNavigate == DialogToNavigate.Setup)
+            {
+                await AppLocator.SetupViewModel.Initialize();
+                SetupDialog setupDialog = new SetupDialog();
+                setupDialog.DataContext = AppLocator.SetupViewModel;
+                await setupDialog.ShowAsync();
+            }
+            else
+            {
+
+            }
         }
     }
 }

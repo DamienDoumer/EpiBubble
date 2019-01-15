@@ -1,4 +1,5 @@
 ﻿using EpiBubble.Helpers;
+using EpiBubble.ViewModels;
 using EpiBubble.Views;
 using Microsoft.Xna.Framework;
 using System;
@@ -45,6 +46,18 @@ namespace EpiBubble
             {
                 _game = MonoGame.Framework.XamlGame<EpiBubbleXboxGame>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
             }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            (DataContext as IViewModel).Initialize();
+            base.OnNavigatedTo(e);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            (DataContext as IViewModel).Stop();
+            base.OnNavigatedFrom(e);
         }
     }
 }

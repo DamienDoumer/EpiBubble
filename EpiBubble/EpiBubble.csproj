@@ -115,6 +115,7 @@
     <Compile Include="Services\SimpleNavigationService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\GamePageViewModel.cs" />
+    <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\SaveViewModel.cs" />
     <Compile Include="ViewModels\SetupViewModel.cs" />
     <Compile Include="Views\EpiBubbleTabletGame.cs" />

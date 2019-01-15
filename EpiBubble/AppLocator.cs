@@ -1,4 +1,5 @@
-﻿using EpiBubble.ViewModels;
+﻿using EpiBubble.Services;
+using EpiBubble.ViewModels;
 using Splat;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,10 @@ namespace EpiBubble
 
         public AppLocator()
         {
+            Locator.CurrentMutable.Register(() => new SimpleNavigationService());
             Locator.CurrentMutable.Register(() => new SetupViewModel());
             Locator.CurrentMutable.Register(() => new SaveViewModel());
-            Locator.CurrentMutable.Register(() => new GamePageViewModel());
+            Locator.CurrentMutable.Register(() => new GamePageViewModel(Locator.CurrentMutable.GetService<SimpleNavigationService>()));
         }
     }
 }

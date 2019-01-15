@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EpiBubble.ViewModels
 {
-    public abstract class BaseViewModel : ReactiveObject
+    public abstract class BaseViewModel : ReactiveObject, IViewModel
     {
         public virtual Task Initialize()
         {

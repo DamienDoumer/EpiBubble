@@ -23,10 +23,11 @@ namespace EpiBubble.Views
     {
         public SetupDialog()
         {
-            DataContext = AppLocator.SetupViewModel;
             this.InitializeComponent();
             Closed += SetupDialog_Closed;
         }
+
+        
 
         private void SetupDialog_Closed(ContentDialog sender, ContentDialogClosedEventArgs args)
         {

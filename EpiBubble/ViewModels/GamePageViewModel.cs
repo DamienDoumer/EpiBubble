@@ -1,4 +1,5 @@
 ﻿using EpiBubble.Helpers;
+using EpiBubble.Services;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Windows.Input;
 
 namespace EpiBubble.ViewModels
 {
-    public class GamePageViewModel : ReactiveObject
+    public class GamePageViewModel : BaseViewModel
     {
         private string _score = 0.ToString();
         public string Score
@@ -21,13 +22,28 @@ namespace EpiBubble.ViewModels
         public ICommand QuitCommand { get; private set; }
         public ICommand RestartCommand { get; private set; }
         public ICommand SetupCommand { get; private set; }
+        public SetupDialogClosedEventArgs Settings { get; set; }
+        SimpleNavigationService _navService;
 
-        public GamePageViewModel()
+        public GamePageViewModel(SimpleNavigationService navService)
         {
+            _navService = navService;
             QuitCommand = ReactiveCommand.Create(() => Environment.Exit(1));
             RestartCommand = ReactiveCommand.Create(() =>
             {
                 MessageBus.Current.SendMessage(new RestartEventArgs { Sender = this });
+            });
+            SetupCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                await _navService.OpenDialogAsync(DialogToNavigate.Setup);
+            });
+        }
+
+        public override async Task Initialize()
+        {
+            MessageBus.Current.Listen<SetupDialogClosedEventArgs>().Subscribe(arg =>
+            {
+                Settings = arg;
             });
         }
     }
