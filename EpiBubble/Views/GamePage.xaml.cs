@@ -30,7 +30,7 @@ namespace EpiBubble
 		public GamePage()
         {
             this.InitializeComponent();
-
+            DataContext = AppLocator.GamePageViewModel;
             var launchArguments = string.Empty;
             // Create the game.
             if (DeviceDetector.DetectDeviceType() == DeviceType.Desktop)
