@@ -7,29 +7,42 @@ using System.Threading.Tasks;
 
 namespace EpiBubble.Helpers
 {
-    public static class Helpers
+    public class Helpers
     {
-        public static Dictionary<int, Color> BallColors { get; set; } = new Dictionary<int, Color>
-        {
-            { 0, Color.Yellow },
-            { 1, Color.Red },
-            { 2, Color.Blue },
-            { 3, Color.Cyan },
-            { 4, Color.Gray },
-            { 5, Color.Maroon },
-            { 6, Color.Silver },
-            { 7, Color.Purple },
-            { 8, Color.Fuchsia },
-            { 9, Color.Green },
-            { 10, Color.Lime },
-            { 11, Color.Purple },
-        };
-        public static Dictionary<int, Color> ArrowColors { get; set; }
-
         public static Color GetRandomBallColor()
         {
-            Random random = new Random();
-            return BallColors.ElementAt(random.Next(1, BallColors.Count)).Value;
+            Color c = Color.White;
+            System.Random rnd = new System.Random();
+            int number = rnd.Next(1, 13);
+            switch (number)
+            {
+                case 1:
+                    return Color.Black;
+                case 2:
+                    return Color.Silver;
+                case 3:
+                    return Color.Gray;
+                case 4:
+                    return Color.Maroon;
+                case 5:
+                    return Color.Red;
+                case 6:
+                    return Color.Purple;
+                case 7:
+                    return Color.Fuchsia;
+                case 8:
+                    return Color.Green;
+                case 9:
+                    return Color.Lime;
+                case 10:
+                    return Color.Yellow;
+                case 11:
+                    return Color.Blue;
+                case 12:
+                    return Color.Cyan;
+            }
+            return c;
         }
+        public static Dictionary<int, Color> ArrowColors { get; set; }
     }
 }

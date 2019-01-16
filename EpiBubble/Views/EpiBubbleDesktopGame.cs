@@ -20,6 +20,7 @@ namespace EpiBubble
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Arrow _arrow;
+        List<Bubble> _myBubbles;
 
         public EpiBubbleDesktopGame()
         {
@@ -35,15 +36,15 @@ namespace EpiBubble
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            InitializeBubbles();
             MessageBus.Current.Listen<RestartEventArgs>()
                 .Where(e => e.Sender.GetType() == typeof(GamePageViewModel))
                 .Subscribe(
-                x => 
+                x =>
                 {
                     Debug.WriteLine("Restart fired");
-                }, 
-                e => 
+                },
+                e =>
                 {
                     Debug.WriteLine("Error while listening for game restart");
                 });
@@ -62,8 +63,6 @@ namespace EpiBubble
             var yPosition = graphics.GraphicsDevice.Viewport.Height - arrowTexture.Height + 5;
             var xPosition = (graphics.GraphicsDevice.Viewport.Width / 2) - (arrowTexture.Width / 2);
             _arrow = new Arrow(arrowTexture, new Vector2(xPosition, yPosition), Color.Green);
-
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -96,11 +95,30 @@ namespace EpiBubble
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
+            foreach (var item in _myBubbles)
+            {
+                item.Draw(spriteBatch);
+            }
             _arrow.Draw(spriteBatch);
             spriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+        }
+
+        //rajouter couleur
+        public void InitializeBubbles()
+        {
+            _myBubbles = new List<Bubble>();
+            float coordoX = 0;
+            float coordoY = 0;
+            _myBubbles = new List<Bubble>();
+
+            for (int i = 0; i < 17; i++)
+            {
+                this._myBubbles.Add(new Bubble(Content.Load<Texture2D>("Bubble"), new Vector2(coordoX, coordoY), Helpers.Helpers.GetRandomBallColor()));
+                coordoX += 80;
+            }
         }
     }
 }
