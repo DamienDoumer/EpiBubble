@@ -9,8 +9,29 @@
     Title="Setup"
     PrimaryButtonText="Ok">
 
-    <Grid>
-        <TextBlock Text="Heyyyyy" />
+    <Grid RowSpacing="10" ColumnSpacing="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Difficulty:"/>
+        <ComboBox Grid.Column="1" ItemsSource="{Binding Difficulties}" SelectedItem="{Binding SelectedDifficulty, Mode=TwoWay}"/>
+
+        <TextBlock Text="Number of Shots:"
+                   Grid.Row="1"/>
+        <TextBox Text="{Binding TextEntered, Mode=TwoWay}"
+                 PlaceholderText="NUmber of Shots Before New Bubble Line"
+                 Grid.Column="1" Grid.Row="1"/>
+
+        <TextBlock Grid.Row="2" Text="Arrow Color"/>
+        <ComboBox ItemsSource="{Binding Colors}" SelectedItem="{Binding ArrowColor, Mode=TwoWay}"
+                  Grid.Column="1" Grid.Row="2"/>
     </Grid>
     
 </ContentDialog>

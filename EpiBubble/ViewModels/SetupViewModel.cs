@@ -20,6 +20,7 @@ namespace EpiBubble.ViewModels
             get => _difficulty;
             set => this.RaiseAndSetIfChanged(ref _difficulty, value);
         }
+        public List<Difficulty> Difficulties { get; set; }
 
         private int _countBeforeNewLine;
         public int CountBeforeNewLine
@@ -28,6 +29,14 @@ namespace EpiBubble.ViewModels
             set { this.RaiseAndSetIfChanged(ref _countBeforeNewLine , value); }
         }
 
+        private string _textEntered;
+        public string TextEntered
+        {
+            get { return _textEntered; }
+            set { this.RaiseAndSetIfChanged(ref _textEntered, value); }
+        }
+
+
         private Color _arrowColor;
         public Color ArrowColor
         {
@@ -35,6 +44,29 @@ namespace EpiBubble.ViewModels
             set { this.RaiseAndSetIfChanged(ref _arrowColor, value); }
         }
 
+        public List<Color> Colors { get; set; }
+
+        public SetupViewModel()
+        {
+            Colors = new List<Color>
+            {
+                Color.Red,
+                Color.Black,
+                Color.Blue,
+                Color.Yellow
+            };
+            CountBeforeNewLine = 6;
+            Difficulties = Enum.GetValues(typeof(Difficulty)).Cast<Difficulty>().ToList();
+            this.WhenAny(x => x.TextEntered, txt => txt.Value)
+                .Subscribe(newText =>
+                {
+                    if (!string.IsNullOrEmpty(newText))
+                    {
+                        if (char.IsDigit(newText.Last()))
+                            TextEntered = newText.Remove(TextEntered.Length - 1);
+                    }
+                });
+        }
 
         public override async Task Initialize()
         {
@@ -42,10 +74,10 @@ namespace EpiBubble.ViewModels
                    .Subscribe(
                    x =>
                    {
-                       Debug.WriteLine("Setup!!!");
+                       var isNumeric = int.TryParse(TextEntered, out int n);
                        MessageBus.Current.SendMessage(new SetupDialogClosedEventArgs()
                        {
-                           NumberOfShotsBeforeNewRow = CountBeforeNewLine,
+                           NumberOfShotsBeforeNewRow = isNumeric ? n : CountBeforeNewLine,
                            PreferedArrowColor = ArrowColor,
                            DifficultyLevel = SelectedDifficulty
                        });
