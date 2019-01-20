@@ -1,4 +1,5 @@
-﻿using EpiBubble.Views;
+﻿using EpiBubble.Model.DataModel;
+using EpiBubble.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace EpiBubble.Services
 
     public class SimpleNavigationService
     {
-        public async Task OpenDialogAsync(DialogToNavigate dialogToNavigate)
+        public async Task OpenDialogAsync(DialogToNavigate dialogToNavigate, UserOptions userOptions = null)
         {
             if (dialogToNavigate == DialogToNavigate.Setup)
             {
@@ -29,7 +30,12 @@ namespace EpiBubble.Services
             }
             else
             {
-
+                if (userOptions == null)
+                    userOptions = new UserOptions();
+                await AppLocator.SaveViewModel.Initialize();
+                SaveDialog saveDialog = new SaveDialog();
+                saveDialog.DataContext = AppLocator.SaveViewModel;
+                await saveDialog.ShowAsync();
             }
         }
     }

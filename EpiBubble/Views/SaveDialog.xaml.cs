@@ -1,6 +1,4 @@
-﻿using EpiBubble.Helpers;
-using ReactiveUI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,17 +17,11 @@ using Windows.UI.Xaml.Navigation;
 
 namespace EpiBubble.Views
 {
-    public sealed partial class SetupDialog : ContentDialog
+    public sealed partial class SaveDialog : ContentDialog
     {
-        public SetupDialog()
+        public SaveDialog()
         {
             this.InitializeComponent();
-            Closed += SetupDialog_Closed;
-        }
-
-        private void SetupDialog_Closed(ContentDialog sender, ContentDialogClosedEventArgs args)
-        {
-            MessageBus.Current.SendMessage(args);
         }
     }
 }

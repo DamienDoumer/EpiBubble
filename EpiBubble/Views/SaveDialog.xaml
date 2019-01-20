@@ -1,0 +1,17 @@
+﻿<ContentDialog
+    x:Class="EpiBubble.Views.SaveDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EpiBubble.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="save Game"
+    PrimaryButtonText="OK"
+    PrimaryButtonCommand="{Binding CloseCommand}">
+
+    <Grid>
+        <TextBox PlaceholderText="Enter The User Name" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding UserName, Mode=TwoWay}"/>
+    </Grid>
+    
+</ContentDialog>

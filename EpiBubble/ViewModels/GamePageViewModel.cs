@@ -1,4 +1,5 @@
 ﻿using EpiBubble.Helpers;
+using EpiBubble.Model.DataModel;
 using EpiBubble.Services;
 using ReactiveUI;
 using System;
@@ -18,25 +19,27 @@ namespace EpiBubble.ViewModels
             get { return _score; }
             set { this.RaiseAndSetIfChanged(ref _score, value); }
         }
-
+        public UserOptions UserOptions { get; set; }
         public ICommand QuitCommand { get; private set; }
-        public ICommand RestartCommand { get; private set; }
+        public ICommand SaveCommand { get; private set; }
         public ICommand SetupCommand { get; private set; }
         public SetupDialogClosedEventArgs Settings { get; set; }
         SimpleNavigationService _navService;
 
         public GamePageViewModel(SimpleNavigationService navService)
         {
+            UserOptions = new UserOptions { Score = 1, ArrowRotationAngle = 10, NumberOfBubbles = 17 };
             _navService = navService;
             QuitCommand = ReactiveCommand.Create(() => Environment.Exit(1));
-            RestartCommand = ReactiveCommand.Create(() =>
+            SaveCommand = ReactiveCommand.Create(async () =>
             {
-                MessageBus.Current.SendMessage(new RestartEventArgs { Sender = this });
+                await _navService.OpenDialogAsync(DialogToNavigate.Save, UserOptions);
             });
             SetupCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 await _navService.OpenDialogAsync(DialogToNavigate.Setup);
             });
+            
         }
 
         public override async Task Initialize()
