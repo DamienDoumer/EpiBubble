@@ -300,8 +300,10 @@ namespace EpiBubble
             {
                 this.myBubbles15Row.Add(item);
             }
+			
+			
             // ici on test si le remove fonctionne : utilisation : this.myBubbles15Row[3][2] remplacer ca pas la bubble lancé
-            this.RemoveBubbleIf3Shot(this.EveryBubbleToRemove(this.ListNextToBubbleSameColor(this.myBubbles15Row[3][2])));
+            //this.RemoveBubbleIf3Shot(this.EveryBubbleToRemove(this.ListNextToBubbleSameColor(this.myBubbles15Row[3][2])));
            
         }
 
