@@ -2,77 +2,36 @@
 using System;
 using System.IO;
 using Newtonsoft.Json;
+using Windows.Storage;
+using System.Threading.Tasks;
 
 namespace EpiBubble.Services
 {
     public class UserOptionsDataService : IDataService<UserOptions>
     {
-        const string SaveDir = "DataDir";
         const string SaveFile = "DataFile.txt";
 
-        public bool Delete()
+        public Task<bool> Delete()
         {
             throw new NotImplementedException();
         }
 
-        public UserOptions Read()
+        public async Task<UserOptions> Read()
         {
-            if (Directory.Exists(SaveDir))
-            {
-                return ReadFromFile();
-            }
-            else
-            {
-                Directory.CreateDirectory(SaveDir);
-                return ReadFromFile();
-            }
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            StorageFile file = await storageFolder.GetFileAsync(SaveFile);
+            return JsonConvert.DeserializeObject<UserOptions>((await FileIO.ReadTextAsync(file)));
         }
 
-        public bool Save(UserOptions item)
+        public async Task<bool> Save(UserOptions item)
         {
-            if(Directory.Exists(SaveDir))
-            {
-                return WriteToFile(item);
-            }
-            else
-            {
-                Directory.CreateDirectory(SaveDir);
-                return WriteToFile(item);
-            }
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            var file = await storageFolder.CreateFileAsync(SaveFile, CreationCollisionOption.FailIfExists);
+            await FileIO.WriteTextAsync(file, JsonConvert.SerializeObject(item));
+            return true;
         }
 
-        UserOptions ReadFromFile()
-        {
-            try
-            {
-                using (var reader = new StreamReader($"{SaveDir}\\{SaveFile}"))
-                {
-                    return JsonConvert.DeserializeObject<UserOptions>(reader.ReadLine());
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        bool WriteToFile(UserOptions item)
-        {
-            try
-            {
-                using (var writer = new StreamWriter($"{SaveDir}\\{SaveFile}"))
-                {
-                    writer.WriteLine(JsonConvert.SerializeObject(item));
-                    return true;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public bool Update(UserOptions item)
+        public Task<bool> Update(UserOptions item)
         {
             throw new NotImplementedException();
         }

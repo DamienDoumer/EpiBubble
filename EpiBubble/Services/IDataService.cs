@@ -8,9 +8,9 @@ namespace EpiBubble.Services
 {
     public interface IDataService<T>
     {
-        T Read();
-        bool Delete();
-        bool Update(T item);
-        bool Save(T item);
+        Task<T> Read();
+        Task<bool> Delete();
+        Task<bool> Update(T item);
+        Task<bool> Save(T item);
     }
 }

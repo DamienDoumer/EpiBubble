@@ -34,7 +34,9 @@ namespace EpiBubble.Services
                     userOptions = new UserOptions();
                 await AppLocator.SaveViewModel.Initialize();
                 SaveDialog saveDialog = new SaveDialog();
-                saveDialog.DataContext = AppLocator.SaveViewModel;
+                var saveVM = AppLocator.SaveViewModel;
+                saveVM.UserOptions = userOptions;
+                saveDialog.DataContext = saveVM;
                 await saveDialog.ShowAsync();
             }
         }
