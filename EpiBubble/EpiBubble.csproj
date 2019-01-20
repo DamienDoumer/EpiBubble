@@ -110,9 +110,12 @@
     <Compile Include="Helpers\SetupDialogClosedEventArgs.cs" />
     <Compile Include="Model\Arrow.cs" />
     <Compile Include="Model\Bubble.cs" />
+    <Compile Include="Model\DataModel\UserOptions.cs" />
     <Compile Include="Model\Sprite.cs" />
     <Compile Include="Helpers\DeviceDetector.cs" />
+    <Compile Include="Services\IDataService.cs" />
     <Compile Include="Services\SimpleNavigationService.cs" />
+    <Compile Include="Services\UserOptionsDataService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\GamePageViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
@@ -171,11 +174,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="LiteDB">
-      <Version>4.1.4</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.3</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.1</Version>
     </PackageReference>
     <PackageReference Include="ReactiveUI">
       <Version>9.7.2</Version>
