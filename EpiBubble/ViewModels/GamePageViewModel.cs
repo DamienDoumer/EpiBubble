@@ -31,7 +31,7 @@ namespace EpiBubble.ViewModels
             UserOptions = new UserOptions { Score = 1, ArrowRotationAngle = 10, NumberOfBubbles = 17 };
             _navService = navService;
             QuitCommand = ReactiveCommand.Create(() => Environment.Exit(1));
-            SaveCommand = ReactiveCommand.Create(async () =>
+            SaveCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 await _navService.OpenDialogAsync(DialogToNavigate.Save, UserOptions);
             });
