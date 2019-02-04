@@ -26,7 +26,7 @@ namespace EpiBubble.Services
         public async Task<bool> Save(UserOptions item)
         {
             StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-            var file = await storageFolder.CreateFileAsync(SaveFile, CreationCollisionOption.FailIfExists);
+            var file = await storageFolder.CreateFileAsync(SaveFile, CreationCollisionOption.OpenIfExists);
             await FileIO.WriteTextAsync(file, JsonConvert.SerializeObject(item));
             return true;
         }
