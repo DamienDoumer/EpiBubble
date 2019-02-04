@@ -13,7 +13,7 @@ namespace EpiBubble.Model
     {
         protected readonly Texture2D texture;
         protected Vector2 position;
-        public Color Color { get; private set; }
+        public Color Color { get; set; }
         protected Vector2 Velocity { get; set; }
         protected float Speed { get; set; }
         public float Width { get { return texture.Width; } }

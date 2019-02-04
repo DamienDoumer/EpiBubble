@@ -37,12 +37,11 @@ namespace EpiBubble
         protected override void Initialize()
         {
             InitializeBubbles();
-            MessageBus.Current.Listen<RestartEventArgs>()
-                .Where(e => e.Sender.GetType() == typeof(GamePageViewModel))
+            MessageBus.Current.Listen<SetupDialogClosedEventArgs>()
                 .Subscribe(
                 x =>
                 {
-                    Debug.WriteLine("Restart fired");
+                    _arrow.Color = new Color(x.PreferedArrowColor.R, x.PreferedArrowColor.G, x.PreferedArrowColor.B);
                 },
                 e =>
                 {
