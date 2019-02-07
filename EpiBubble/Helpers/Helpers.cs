@@ -9,6 +9,44 @@ namespace EpiBubble.Helpers
 {
     public class Helpers
     {
+        public static List<Color> RandomColorDefault()
+        {
+            List<Color> res = new List<Color>();
+            Random rnd = new System.Random();
+
+            for (int i = 0; i < 17; i++)
+            {
+                Color c = Color.White;
+                int number = rnd.Next(1, 7);
+
+                if (number == 1)
+                {
+                    res.Add(Color.Blue);
+                }
+                if (number == 2)
+                {
+                    res.Add(Color.Red);
+                }
+                if (number == 3)
+                {
+                    res.Add(Color.Cyan);
+                }
+                if (number == 4)
+                {
+                    res.Add(Color.Yellow);
+                }
+                if (number == 5)
+                {
+                    res.Add(Color.Fuchsia);
+                }
+                if (number == 6)
+                {
+                    res.Add(Color.Lime);
+                }
+            }
+            return res;
+        }
+
         public static Color GetRandomBallColor()
         {
             Color c = Color.White;

@@ -28,9 +28,9 @@
                 <ColumnDefinition  Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Quit" Grid.Column="1" Margin="5" Command="{Binding QuitCommand}"/>
-            <Button Content="Save" Grid.Column="2" Margin="5" Command="{Binding SaveCommand}"/>
-            <Button Content="Setup" Grid.Column="3" Margin="5" Command="{Binding SetupCommand}"/>
+            <Button Content="Quit" IsTabStop="False" Grid.Column="1" Margin="5" Command="{Binding QuitCommand}"/>
+            <Button Content="Save" IsTabStop="False"   Grid.Column="2" Margin="5" Command="{Binding SaveCommand}"/>
+            <Button Content="Setup" IsTabStop="False"  Grid.Column="3" Margin="5" Command="{Binding SetupCommand}"/>
         </Grid>
     </SwapChainPanel>
 

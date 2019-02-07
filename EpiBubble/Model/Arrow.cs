@@ -34,8 +34,30 @@ namespace EpiBubble.Model
 
         public override void Update(KeyboardState keyboardState, GameTime gameTime)
         {
-            UpdateVelocityFromKeyboard(keyboardState);
+            var mouseState = Mouse.GetState();
+            if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.Right))
+            {
+                UpdateVelocityFromKeyboard(keyboardState);
+            }
+            else
+            {
+                // UpdateVelocityFromMouse(mouseState);
+            }
             base.Update(keyboardState, gameTime);
+        }
+
+        private void UpdateVelocityFromMouse(MouseState mouseState)
+        {
+            if (mouseState.Position.X > 0)
+            {
+                if (RotationAngle < 1.1)
+                    RotationAngle = RotationAngle + 0.1f;
+            }
+            else
+            {
+                if (RotationAngle > -1.1)
+                    RotationAngle = RotationAngle + -0.1f;
+            }
         }
 
         private void UpdateVelocityFromKeyboard(KeyboardState keyboardState)
