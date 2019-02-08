@@ -27,18 +27,24 @@ namespace EpiBubble
         List<Bubble> myBubbles;
         List<List<Bubble>> myBubbles15Row;
         private Vector2 myPos;
-        private Vector2 myMove;
+        //private Vector2 myMove;
         private Bubble bShoot;
         private Color bShootColor;
+        Vector2 deplacement;
+        bool launched;
+        int speed = 5;
+        bool redrawBubble;
 
         public EpiBubbleDesktopGame()
         {
+            deplacement = new Vector2(0,0);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferWidth = 544;
             //graphics.PreferredBackBufferHeight = 700;
             graphics.IsFullScreen = false;
             Window.Title = "BubbleGame";
+            myPos = new Vector2(527/2, 400);
         }
 
         /// <summary>
@@ -57,16 +63,25 @@ namespace EpiBubble
                 .Subscribe(
                 x =>
                 {
+                    if (x.DifficultyLevel == Difficulty.Fast)
+                    {
+                        speed = 20;
+                    }
+                    else if (x.DifficultyLevel == Difficulty.Low)
+                    {
+                        speed = 5;
+                    }
+                    else
+                    {
+                        speed = 10;
+                    }
                     _arrow.Color = new Color(x.PreferedArrowColor.R, x.PreferedArrowColor.G, x.PreferedArrowColor.B);
                 },
                 e =>
                 {
                     Debug.WriteLine("Error while listening for game restart");
                 });
-
-            //initi la pos de la bubble
-            this.myPos = this.bShoot.Position;
-            this.myMove = Vector2.Zero;
+            
             base.Initialize();
         }
 
@@ -80,7 +95,7 @@ namespace EpiBubble
             spriteBatch = new SpriteBatch(GraphicsDevice);
             var arrowTexture = Content.Load<Texture2D>("Arrow/Arrow");
             //yPosition = graphics.GraphicsDevice.Viewport.Height - arrowTexture.Height + 5;
-            //xPosition = (graphics.GraphicsDevice.Viewport.Width / 2) - (arrowTexture.Width / 2);
+            ////xPosition = (graphics.GraphicsDevice.Viewport.Width / 2) - (arrowTexture.Width / 2);
             xPosition = 527 / 2;
             yPosition = 300 + 100;
             _arrow = new Arrow(arrowTexture, new Vector2(xPosition, yPosition), Color.Green);
@@ -105,10 +120,37 @@ namespace EpiBubble
             var c = Helpers.Helpers.GetRandomBallColor();
             // TODO: Add your update logic here
             _arrow.Update(Keyboard.GetState(), gameTime);
-            bShoot.Update(Keyboard.GetState(), gameTime);
+            ThrowBubble();
+            bShoot.RotationAngle = _arrow.RotationAngle;
+            if (launched)
+            {
+                //ScreenBoundsTouched();
+                if (myPos.X < 3)
+                {
+                    myPos.X = myPos.X + 3;
+                    bShoot.RotationAngle = Math.Abs(bShoot.RotationAngle);
 
-            this.myPos += this.myMove;
+                }
+                else if (myPos.X > 527)
+                {
+                    myPos.X = myPos.X - 6;
+                    bShoot.RotationAngle = bShoot.RotationAngle * -1f;
+                }
+                else
+                {
+                    Shoot(speed);
+                }
+            }
+            
             base.Update(gameTime);
+        }
+
+        public void ThrowBubble()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                launched = true;
+            }
         }
 
         /// <summary> 
@@ -131,8 +173,7 @@ namespace EpiBubble
                     item.Draw(spriteBatch);
                 }
             }
-            this.bShoot.Draw(spriteBatch, this.myPos);
-            bShoot.ShootingBubble = true;
+            bShoot.Draw(spriteBatch, myPos);
             // spriteBatch.Draw(this.bShoot.GetTexture(), this.myPos, this.bShootColor);
             spriteBatch.End();
             // TODO: Add your drawing code here
@@ -140,31 +181,63 @@ namespace EpiBubble
             base.Draw(gameTime);
         }
 
-        public void Shoot(int vitesse)
+        public bool CheckBubbleOut()
         {
-            bShoot.position.X = (float)(myPos.X + (vitesse * (Math.Cos(bShoot.RotationAngle))));
-            bShoot.position.Y = (float)(myPos.Y + (vitesse * (Math.Sin(bShoot.RotationAngle))));
+            if (myPos.Y < -42 || myPos.X > 40)
+            {
+                return true;
+            }
+            return false;
         }
 
-        //rajouter couleur
-        /// <summary>
-        /*
-     
-        public void InitializeBubbles()
+        public void ScreenBoundsTouched()
         {
-            _myBubbles = new List<Bubble>();
-            float coordoX = 0;
-            float coordoY = 0;
-            _myBubbles = new List<Bubble>();
+            myPos += deplacement;
+            int screenWidth = 527;
+            int screenHeight = 400;
 
-            for (int i = 0; i < 17; i++)
+            // Ici on teste si Zozor se déplace vers la gauche, si c'est le cas
+            // on vérifie qu'il ne sort pas de l'écran par la gauche.
+            // Même chose pour le déplacement vers la droite
+            if ((deplacement.X < 0 && myPos.X <= 1)
+
+                 || (deplacement.X > 0 && myPos.X + 31 >= screenWidth))
+
             {
-                this._myBubbles.Add(new Bubble(Content.Load<Texture2D>("Bubble"), new Vector2(coordoX, coordoY), Helpers.Helpers.GetRandomBallColor()));
-                coordoX += 80;
+
+                // Si on est dans un des deux cas, on inverse le déplacement sur les abscisses
+
+                deplacement.X = -deplacement.X;
+
+            }
+
+
+            // On fait la même opération mais pour le haut/bas
+
+            if ((deplacement.Y < 0 && myPos.Y <= 1)
+
+                 || (deplacement.Y > 0 && myPos.Y + 31 >= screenHeight))
+
+            {
+
+                // Si c'est le cas, on inverse le déplacement sur les ordonnées
+
+                deplacement.Y = -deplacement.Y;
             }
         }
-
-    */
+        public void Shoot(int vitesse)
+        {
+            bShoot.RotationAngle = _arrow.RotationAngle;
+            var v = !CheckBubbleOut();
+            if (true)
+            {
+                myPos.X = (float)(myPos.X + (vitesse * (Math.Cos(_arrow.RotationAngle - 1.52f))));
+                myPos.Y = (float)(myPos.Y + (vitesse * (Math.Sin(_arrow.RotationAngle - 1.52f))));
+                if (_arrow.RotationAngle < 0)
+                {
+                }
+            }
+        }
 
         public Bubble InitBubbleToShoot()
         {
@@ -351,7 +424,7 @@ namespace EpiBubble
         //retourne la liste de tous les bubbles a supprimer
         public List<Bubble> EveryBubbleToRemove(System.Collections.Generic.List<Bubble> listB)
         {
-            System.Collections.Generic.List<Bubble> res = new System.Collections.Generic.List<Bubble>();
+            List<Bubble> res = new List<Bubble>();
 
             foreach (var bubble in listB)
             {

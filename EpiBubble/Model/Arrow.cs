@@ -15,7 +15,7 @@ namespace EpiBubble.Model
         public Arrow(Texture2D texture, Vector2 position, Color color) : base(texture, position, color)
         {
             Speed = 300;
-            RotationAngle = 0;
+            RotationAngle = 0f;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

@@ -30,22 +30,22 @@ namespace EpiBubble.Model
             Position += direction * speed;
         }
 
-        public override void Update(KeyboardState keyboardState, GameTime gameTime)
-        {
-            if (ShootingBubble)
-            {
-                if (keyboardState.IsKeyDown(Keys.Space) || Mouse.GetState().LeftButton == ButtonState.Pressed)
-                {
-                    //shoot bubble
-                    Position = new Vector2(600, 300);
-                }
-                //var xPosition = 527 / 2;
-                //var yPosition = 300 + 100;
-                var newVelocity = new Vector2(Position.X*100, Position.Y*50);
-                Velocity = newVelocity;
-            }
-            Position += Velocity;
-            //base.Update(keyboardState, gameTime);
-        }
+        //public override void Update(KeyboardState keyboardState, GameTime gameTime)
+        //{
+        //    if (ShootingBubble)
+        //    {
+        //        if (keyboardState.IsKeyDown(Keys.Space) || Mouse.GetState().LeftButton == ButtonState.Pressed)
+        //        {
+        //            //shoot bubble
+        //            Position = new Vector2(600, 300);
+        //        }
+        //        //var xPosition = 527 / 2;
+        //        //var yPosition = 300 + 100;
+        //        var newVelocity = new Vector2(Position.X*100, Position.Y*50);
+        //        Velocity = newVelocity;
+        //    }
+        //    Position += Velocity;
+        //    //base.Update(keyboardState, gameTime);
+        //}
     }
 }
