@@ -86,6 +86,11 @@ namespace EpiBubble
             base.Initialize();
         }
 
+        public void CheckbubbleCollision()
+        {
+            RemoveBubbleIf3Shot(EveryBubbleToRemove(ListNextToBubbleSameColor(bShoot)));
+        }
+
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -143,15 +148,26 @@ namespace EpiBubble
                 {
                     //reverseAngle = false;
                     Shoot(speed);
+                    CheckbubbleCollision();
+                    CreateNewBubble();
                 }
             }
             
             base.Update(gameTime);
         }
 
+        public void CreateNewBubble()
+        {
+            if(myPos.Y <= -32)
+            {
+                bShoot = InitBubbleToShoot();
+                launched = false;
+            }
+        }
+
         public void ThrowBubble()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) || Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 launched = true;
             }
@@ -250,8 +266,10 @@ namespace EpiBubble
 
         public Bubble InitBubbleToShoot()
         {
+            myPos.X = 527 / 2;
+            myPos.Y = 300;
             //return new Bubble(Content.Load<Texture2D>("Bubble"), new Vector2(xPosition, yPosition+32), Helpers.Helpers.GetRandomBallColor());
-            return new Bubble(Content.Load<Texture2D>("Bubble"), new Vector2(527/2,300), Helpers.Helpers.GetRandomBallColor());
+            return new Bubble(Content.Load<Texture2D>("Bubble"), new Vector2(myPos.X,myPos.Y), Helpers.Helpers.GetRandomBallColor());
         }
 
         // créer une ligne de 17 bubble a une position (0,cY)
