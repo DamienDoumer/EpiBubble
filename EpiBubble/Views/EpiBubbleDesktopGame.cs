@@ -34,6 +34,7 @@ namespace EpiBubble
         bool launched;
         int speed = 5;
         bool redrawBubble;
+        bool reverseAngle;
 
         public EpiBubbleDesktopGame()
         {
@@ -127,17 +128,20 @@ namespace EpiBubble
                 //ScreenBoundsTouched();
                 if (myPos.X < 3)
                 {
-                    myPos.X = myPos.X + 3;
+                    reverseAngle = true;
+                    myPos.X = myPos.X + 6;
                     bShoot.RotationAngle = Math.Abs(bShoot.RotationAngle);
 
                 }
                 else if (myPos.X > 527)
                 {
-                    myPos.X = myPos.X - 6;
+                    reverseAngle = true;
+                    myPos.X = myPos.X - 12;
                     bShoot.RotationAngle = bShoot.RotationAngle * -1f;
                 }
                 else
                 {
+                    //reverseAngle = false;
                     Shoot(speed);
                 }
             }
@@ -229,13 +233,18 @@ namespace EpiBubble
         {
             bShoot.RotationAngle = _arrow.RotationAngle;
             var v = !CheckBubbleOut();
-            if (true)
+            if (reverseAngle)
             {
-                myPos.X = (float)(myPos.X + (vitesse * (Math.Cos(_arrow.RotationAngle - 1.52f))));
+                myPos.X = (float)(myPos.X + (vitesse * (Math.Cos(_arrow.RotationAngle + 1.52f))));
                 myPos.Y = (float)(myPos.Y + (vitesse * (Math.Sin(_arrow.RotationAngle - 1.52f))));
                 if (_arrow.RotationAngle < 0)
                 {
                 }
+            }
+            else
+            {
+                myPos.X = (float)(myPos.X + (vitesse * (Math.Cos(_arrow.RotationAngle - 1.52f))));
+                myPos.Y = (float)(myPos.Y + (vitesse * (Math.Sin(_arrow.RotationAngle - 1.52f))));
             }
         }
 
